@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar class="tolbar">
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card button *ngFor="let categories of (category)" [routerLink] = "['/','products',categories.id]">
+    <ion-card-header>
+      <div *ngIf="categories.image.src != null">
+        <img src="{{categories.image.src}}">
+      </div>     
+      <ion-card-title>{{categories.name}} </ion-card-title>
+    </ion-card-header>
+  </ion-card>     
+</ion-content>

@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl:'https://localhost/tienda',
+  consumerKey: 'ck_a6e0dbb7887ebb98a925d2fdf7781a296ac41e85',
+  consumerSecret:'cs_e3ebeeab8d8ddd19f56d77d63de4626eb225a784'
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
