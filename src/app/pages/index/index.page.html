@@ -1,16 +1,31 @@
 <ion-header>
   <ion-toolbar class="tolbar">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <!-- Searchbar with a placeholder -->
+      <ion-searchbar placeholder="Busca tu diseño"></ion-searchbar>
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="basket-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card button *ngFor="let categories of (category)" [routerLink] = "['/','products',categories.id]">
-    <ion-card-header>
-      <div *ngIf="categories.image.src != null">
-        <img src="{{categories.image.src}}">
-      </div>     
-      <ion-card-title>{{categories.name}} </ion-card-title>
-    </ion-card-header>
-  </ion-card>     
+  <div>
+      <ion-card size-lg="3" size-md="4" size-sm="12" size-xsm="12" button *ngFor="let categories of (category)" [routerLink] = "['/','products',categories.id]">
+        <div *ngIf="categories.image.src != null">
+          <img class="catImage" src="{{categories.image.src}}">
+          <div class="font">
+            {{categories.name}}
+          </div>
+        </div>          
+      </ion-card> 
+  </div>
 </ion-content>

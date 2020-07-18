@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from "@angular/common/http";
-import { environment } from "../../environments/environment.prod";
+import { environment } from "../../environments/environment";
 import { Categories } from '../model/categories';
 
 
@@ -16,9 +16,8 @@ export class HttpService {
    * @param serviceName Nombre del servicio
    */
   get(serviceName: string){
-    const headers = new HttpHeaders();
-    const url = `${environment.apiUrl}${serviceName}consumer_key=${environment.consumerKey}&consumer_secret=${environment.consumerSecret}`
-    const options = { headers: headers}
-    return this.http.get<Categories>(url,options);
+    const url = `${environment.apiUrl}/wp-json/${environment.version}/${serviceName}consumer_key=${environment.consumerKey}&consumer_secret=${environment.consumerSecret}`
+    
+    return this.http.get(url);
   }
 }

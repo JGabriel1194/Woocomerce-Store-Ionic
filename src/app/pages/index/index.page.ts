@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from "rxjs";
-import { CategoriesService } from "../../services/categories.service";
+import { ProductsService } from "../../services/products.service";
 import { Categories } from 'src/app/model/categories';
 import { LoadingController } from '@ionic/angular';
 
@@ -15,7 +15,7 @@ export class IndexPage implements OnInit {
   @Input() title: string;
 
   constructor(
-    private categoriesService: CategoriesService, 
+    private productsService: ProductsService, 
     private loadingController: LoadingController
   ) { }
 
@@ -24,7 +24,7 @@ export class IndexPage implements OnInit {
   }
 
   loadCategories(){
-    this.categoriesService.listCategories().subscribe(
+    this.productsService.listCategories().subscribe(
       (res: any)=> {
         this.category = res;
         console.log(res);

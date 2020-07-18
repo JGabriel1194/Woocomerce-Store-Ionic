@@ -1,4 +1,4 @@
-import { CategoriesService } from './../../services/categories.service';
+import { ProductsService } from '../../services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,15 +12,19 @@ export class ProductsPage implements OnInit {
   id: string ;
   constructor(
     private activatedRoute: ActivatedRoute, 
-    private categoriesService: CategoriesService ) { }
+    private productsService: ProductsService ) { }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.listProductsCategory();
+    this.listProductsCategory(this.id);
   }
 
-  listProductsCategory(){
-    this.categoriesService.listProductsByCat(this.id).subscribe(
+  /**
+   * Listar productos por el id de la categoria
+   * @param id 
+   */
+  listProductsCategory(id: string){
+    this.productsService.listProductsByCat(id).subscribe(
       (res: any)=>{
         this.products = res;
         console.log(this.products);
