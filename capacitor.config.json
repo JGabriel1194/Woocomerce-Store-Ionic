@@ -1,9 +1,10 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "StoreApp",
+  "appId": "io.creativa.store",
+  "appName": "Creativa",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
+  "linuxAndroidStudioPath": "/snap/android-studio/current/android-studio/bin/studio.sh",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0

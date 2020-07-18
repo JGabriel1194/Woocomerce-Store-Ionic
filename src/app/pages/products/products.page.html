@@ -1,16 +1,22 @@
-<app-header title="Products"></app-header>
+<app-header title="{{catName}}"></app-header>
 
 <ion-content>
     <ion-row>
-        <ion-col size-lg="3" size-md="4" size-sm="12" size-xsm="12" *ngFor="let products of products" >
+        <ion-col size="6" size-md="3" size-sm="4" size-xsm="12" *ngFor="let products of products" >
             <ion-card button [routerLink]="['/','details',products.id]">
-                <ion-card-header>
-                    <div *ngIf="products.images[0].src != null">
-                        <img src="{{products.images[0].src}}">
-                    </div> 
-                    <ion-card-title>{{products.name}} </ion-card-title>
-                    <ion-card-subtitle>{{products.description}}</ion-card-subtitle>
-                </ion-card-header>
+                
+                <div *ngIf="products.images[0].src != null">
+                    <img src="{{products.images[0].src}}">
+                </div> 
+                <div class="textContainer">
+                    <div class="tittle">
+                        {{products.name}}
+                    </div>
+                    <div class="subtittle">
+                        <div class="regular_price" *ngIf="products.regular_price !=''" >${{products.regular_price}}</div>
+                        <div class="price">${{products.price}}</div>
+                    </div>
+                </div>
             </ion-card>
         </ion-col>
     </ion-row>

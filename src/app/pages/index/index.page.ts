@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { ProductsService } from "../../services/products.service";
 import { Categories } from 'src/app/model/categories';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -11,22 +12,26 @@ import { LoadingController } from '@ionic/angular';
 })
 export class IndexPage implements OnInit {
 
-  category: Observable<Categories>;
+  categories: Observable<Categories>;
   @Input() title: string;
 
   constructor(
     private productsService: ProductsService, 
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.presentLoading();
   }
 
+  /**
+   * Carga todas la categorias existentes
+   */
   loadCategories(){
     this.productsService.listCategories().subscribe(
       (res: any)=> {
-        this.category = res;
+        this.categories = res;
         console.log(res);
       },
       (err)=>{
@@ -43,5 +48,9 @@ export class IndexPage implements OnInit {
     await loading.present();
     this.loadCategories();
     await loading.dismiss();
+  }
+
+  pushProducts(id:string,name:string){
+    this.router.navigate(['/products',id,name]);
   }
 }

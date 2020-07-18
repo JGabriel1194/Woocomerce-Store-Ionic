@@ -1,0 +1,39 @@
+ion-card{
+    background: #FFFFFF;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+.textContainer{
+    padding: 8px;
+}
+img{
+    height: 160px;
+    width: 100%;
+}
+.tittle{
+    font-size: 12pt;
+    color: #FE805C;
+    width: 100%;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+.subtittle{
+    font-weight: normal;
+    font-size: 10pt;
+    line-height: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.regular_price{
+    display: inline-block;
+    padding: 5px;
+    text-decoration:line-through;
+    
+}
+.price{
+    display: inline-block;
+    white-space: initial;
+    padding: 5px;
+}
