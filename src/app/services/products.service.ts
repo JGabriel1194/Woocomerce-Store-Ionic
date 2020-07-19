@@ -20,8 +20,8 @@ export class ProductsService {
    * Listar productos por su categoria
    * @param id 
    */
-  listProductsByCat(id: string):Observable<any>{
-    return this.http.get(`products?category=${id}&`);
+  listProductsByCat(id: string, page:string):Observable<any>{
+    return this.http.get(`products?category=${id}&page=${page}&`);
   }
   
   /**

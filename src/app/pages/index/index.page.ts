@@ -1,8 +1,8 @@
+import { LoadingService } from './../../services/loading.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from "rxjs";
 import { ProductsService } from "../../services/products.service";
 import { Categories } from 'src/app/model/categories';
-import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,12 +17,13 @@ export class IndexPage implements OnInit {
 
   constructor(
     private productsService: ProductsService, 
-    private loadingController: LoadingController,
+    private loadingService: LoadingService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.presentLoading();
+    this.loadingService.presentLoading('Cargando');
+    this.loadCategories();
   }
 
   /**
@@ -32,25 +33,15 @@ export class IndexPage implements OnInit {
     this.productsService.listCategories().subscribe(
       (res: any)=> {
         this.categories = res;
+        if(this.categories){
+          this.loadingService.dismissLoading();
+        }
         console.log(res);
-      },
-      (err)=>{
-
       }
     );
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-    });
-    await loading.present();
-    this.loadCategories();
-    await loading.dismiss();
-  }
-
-  pushProducts(id:string,name:string){
-    this.router.navigate(['/products',id,name]);
+  pushProducts(id:string,name:string,count:string){
+    this.router.navigate(['/products',id,name,count]);
   }
 }
