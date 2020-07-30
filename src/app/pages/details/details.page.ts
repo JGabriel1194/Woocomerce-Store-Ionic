@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
-  product: any;
+  product: any = [];
   id: string;
+  images: any;
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductsService,
@@ -24,9 +25,9 @@ export class DetailsPage implements OnInit {
     this.productService.listProductId(id).subscribe(
       (res: any)=>{
         this.product = res;
+        this.images=this.product.images;
         console.log(this.product);
       }
     )
   }
-
 }

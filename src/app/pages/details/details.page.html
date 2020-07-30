@@ -1,5 +1,49 @@
-<app-header title="Detalles"></app-header>
-
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <div class="back-button"></div>
+        <ion-buttons  slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <div class="basket-button"></div>
+        <ion-buttons slot="end">
+            <ion-button slot="end">
+                <ion-icon slot="icon-only" name="basket-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content>
-
+    <ion-slides mode="ios" pager="ios" scrollbar="ios" >
+        <ion-slide *ngFor="let image of images" >
+            <img class="imgSlide" [src]="image.src" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded">
+            <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        </ion-slide>
+    </ion-slides>
+    <ion-card>
+        <div>
+        <div class="information">
+            <div class="tittle">
+                {{product.name}}
+            </div>
+            <div class="sub-tittle" [innerHTML]="product.short_description" ></div>
+            <div class="price">
+                <div class="regular-price" *ngIf="product.regular_price !=''" >
+                    ${{product.regular_price}}
+                </div>
+                <div class="normal-price">
+                ${{product.price}}
+                </div>
+            </div>
+        </div>
+        <div class="valoration">
+            <ion-select value="brown" okText="Ok" cancelText="Cancelar">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+    </ion-select>
+        </div>         
+    </div>
+    </ion-card>
 </ion-content>

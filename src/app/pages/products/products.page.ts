@@ -1,8 +1,7 @@
 import { LoadingService } from './../../services/loading.service';
 import { ProductsService } from '../../services/products.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +17,8 @@ export class ProductsPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute, 
     private productsService: ProductsService,
-    private loadigService: LoadingService
+    private loadigService: LoadingService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -46,6 +46,10 @@ export class ProductsPage implements OnInit {
     );
   }
 
+  /**
+   * Metodo para cargar mas productos.
+   * @param event 
+   */
   async loadMoreProducts(event){
     setTimeout(()=>{
       event.target.complete();
@@ -53,7 +57,6 @@ export class ProductsPage implements OnInit {
         (res: any)=>{
           this.products = this.products.concat(res);
           this.pages++;
-          console.log(this.products);
         }
       );
       if(this.products.length >= this.count){
@@ -61,4 +64,7 @@ export class ProductsPage implements OnInit {
       }
     },5000)
   }
+  clickProduct(id:string){
+    this.router.navigate(['/details',id]);
+  }  
 }

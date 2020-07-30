@@ -36,7 +36,6 @@ export class IndexPage implements OnInit {
         if(this.categories){
           this.loadingService.dismissLoading();
         }
-        console.log(res);
       }
     );
   }
