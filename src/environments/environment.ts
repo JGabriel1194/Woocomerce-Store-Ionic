@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   apiUrl:'https://localhost/tienda',
-  consumerKey: 'ck_a6e0dbb7887ebb98a925d2fdf7781a296ac41e85',
-  consumerSecret:'cs_e3ebeeab8d8ddd19f56d77d63de4626eb225a784',
-  version:"wc/v3"
+  consumerKey: 'ck_3e89befd48f310f380fd088e171f55053aee60cd',
+  consumerSecret:'cs_5984c934d22f02ce53a54b7f6eba296634f8643f',
+  version:'wc/v3'
 };
 /*
  * For easier debugging in development mode, you can import the following file

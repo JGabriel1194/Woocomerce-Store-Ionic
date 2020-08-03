@@ -4,5 +4,11 @@
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title text-capitalize>{{title}}</ion-title>
+    <ion-buttons slot="end" (click)="goCart()" *ngIf="quantity != 'a'">
+      <ion-button slot="end">
+          <ion-icon slot="icon-only" name="basket"></ion-icon>
+      </ion-button>
+      <ion-badge *ngIf="quantity != 0" color="danger">{{quantity}}</ion-badge>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

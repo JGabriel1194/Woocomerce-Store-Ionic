@@ -5,10 +5,11 @@
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
         <div class="basket-button"></div>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" (click)="goCart()">
             <ion-button slot="end">
-                <ion-icon slot="icon-only" name="basket-outline"></ion-icon>
+                <ion-icon slot="icon-only" name="basket"></ion-icon>
             </ion-button>
+            <ion-badge *ngIf="quantity != 0" color="danger">{{quantity}}</ion-badge>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -27,7 +28,7 @@
             </div>
             <div class="sub-tittle" [innerHTML]="product.short_description" ></div>
             <div class="price">
-                <div class="regular-price" *ngIf="product.regular_price !=''" >
+                <div class="regular-price" *ngIf="product.regular_price != product.price" >
                     ${{product.regular_price}}
                 </div>
                 <div class="normal-price">
@@ -47,3 +48,8 @@
     </div>
     </ion-card>
 </ion-content>
+<ion-footer>
+    <ion-button class="btnShop" (click)="addCart()" expand="block" fill="clear" shape="round">
+        AÑADIR A LA COMPRA
+    </ion-button>
+</ion-footer>

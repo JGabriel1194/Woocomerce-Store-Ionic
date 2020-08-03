@@ -53,3 +53,12 @@ ion-title {
     display: block;
     height: 160px;
 }
+ion-badge{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    font-size: 10px;
+}

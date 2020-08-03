@@ -27,6 +27,7 @@ ion-slides{
     top: 0;
     width: 100%;
 }
+
 ion-card{
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
     box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
@@ -62,7 +63,6 @@ ion-card{
     color: #000000;
 }
 .price{
-    font-weight: bold;
     font-size: 18px;
     line-height: 17px;
     letter-spacing: 0.25px;
@@ -73,6 +73,7 @@ ion-card{
     text-decoration:line-through;
 }
 .normal-price{
+    font-weight: bold;
     display: inline-block;
     white-space: initial;
     padding: 5px;
@@ -89,4 +90,12 @@ ion-select {
     width: 100%;
 
     justify-content: center;
+}
+.btnShop{
+    height: 46px;
+    padding: 20;
+    background: #8145FD;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }

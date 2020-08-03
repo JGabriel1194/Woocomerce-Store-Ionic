@@ -6,6 +6,21 @@ ion-card{
     background: #FFFFFF;
     box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    margin: 1px !important;
+}
+.offert{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    background: #FE805C;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20px;
+    color: white;
+    font-weight: bold;
 }
 .textContainer{
     padding: 8px;
@@ -40,4 +55,5 @@ img{
     display: inline-block;
     white-space: initial;
     padding: 5px;
+    font-weight: bold;
 }

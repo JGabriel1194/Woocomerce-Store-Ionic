@@ -1,29 +1,35 @@
-<app-header title="{{catName}}"></app-header>
+<app-header title="{{catName}}" quantity="{{quantity}}"></app-header>
 
 <ion-content fullscreen>
     <ion-row>
-        <ion-col size="6" size-md="3" size-sm="4" size-xsm="12" *ngFor="let product of products" >
+        <ion-col size="6" size-md="3" size-sm="4" size-xsm="12" *ngFor="let product of products">
             <ion-card button (click)="clickProduct(product.id)">
+                <div class="offert" *ngIf="product.regular_price != product.price">
+                    Oferta
+                </div>
                 <div *ngIf="product.images[0].src != null">
-                    <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" src="{{product.images[0].src}}">
+                    <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
+                        src="{{product.images[0].src}}">
                     <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
-                </div> 
+                </div>
                 <div class="textContainer">
                     <div class="tittle">
                         {{product.name.substr(0, 12) + '...'}}
                     </div>
                     <div class="subtittle">
-                        <div class="regular_price" *ngIf="products.regular_price !=null" >${{product.regular_price}}</div>
-                        <div class="price">${{product.price}}</div>
+                        <div class="regular_price" *ngIf="product.regular_price != product.price">
+                            ${{product.regular_price}}
+                        </div>
+                        <div class="price">
+                            ${{product.price}}
+                        </div>
                     </div>
                 </div>
             </ion-card>
         </ion-col>
     </ion-row>
     <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
-        <ion-infinite-scroll-content
-            loadingSpinner="bubbles"
-            loadingText="Cargando productos...">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando productos...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

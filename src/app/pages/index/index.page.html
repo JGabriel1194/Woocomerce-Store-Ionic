@@ -1,33 +1,61 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button slot="start">
-        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      <ion-button slot="start" large>
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
       </ion-button>
       <!-- Searchbar with a placeholder -->
-      <ion-searchbar placeholder="Buscar"></ion-searchbar>
-      <ion-button slot="end">
-        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      <ion-searchbar placeholder="Buscar Diseño" (ionInput)="searchProduct($event)" (ionClear)="clearSearch($event)">
+      </ion-searchbar>
+      <ion-button slot="end" (click)="goCart()">
+        <ion-icon slot="icon-only" name="basket"></ion-icon>
       </ion-button>
-      <ion-button slot="end">
-        <ion-icon slot="icon-only" name="basket-outline"></ion-icon>
-      </ion-button>
+      <ion-badge *ngIf="quantity != 0" color="danger">{{quantity}}</ion-badge>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-row>
+  <ion-row *ngIf="products == null">
     <ion-col size="12" size-md="4" size-sm="6" size-xsm="12" *ngFor="let category of (categories)">
-      <ion-card button (click)="pushProducts(category.id,category.name,category.count)">
+      <ion-card class="cat-card" button (click)="pushProducts(category.id,category.name,category.count)">
         <div *ngIf="category.image">
-          <img class="catImage" src="{{category.image.src}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded">
+          <img class="catImage" src="{{category.image.src}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
+            [hidden]="!loaded">
           <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
         </div>
         <div class="font">
           {{category.name}}
-        </div>          
+        </div>
       </ion-card>
     </ion-col>
-  </ion-row> 
+  </ion-row>
+
+  <ion-row *ngIf="products != null">
+    <ion-col size="6" size-md="3" size-sm="4" size-xsm="12" *ngFor="let product of products">
+      <ion-card class="ion-card" button (click)="clickProduct(product.id)">
+        <div class="offert" *ngIf="product.regular_price != product.price">
+          Oferta
+        </div>
+        <div *ngIf="product.images[0].src != null">
+          <img (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded"
+            src="{{product.images[0].src}}">
+          <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
+        </div>
+        <div class="textContainer">
+          <div class="tittle">
+            {{product.name.substr(0, 12) + '...'}}
+          </div>
+          <div class="subtittle">
+            <div class="regular_price" *ngIf="product.regular_price != product.price">
+              ${{product.regular_price}}
+            </div>
+            <div class="price">
+              ${{product.price}}
+            </div>
+          </div>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-content>

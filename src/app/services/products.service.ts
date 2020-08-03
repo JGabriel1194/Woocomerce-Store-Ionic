@@ -10,25 +10,33 @@ export class ProductsService {
   products: any;
   constructor(private http: HttpService) { }
   /**
-   * Listar las categorias de todos los productos
+   * Funcion para listar las categorias de todos los productos
    */
   listCategories():Observable<any>{
     return this.http.get('products/categories?');
   }
   
   /**
-   * Listar productos por su categoria
-   * @param id 
+   * Funcion para listar productos por su categoria
+   * @param id {String} - Recibe el id de la categoria
    */
   listProductsByCat(id: string, page:string):Observable<any>{
     return this.http.get(`products?category=${id}&page=${page}&`);
   }
   
   /**
-   * Listar detalles del producto seleccionado
-   * @param id
+   * Funcion para listar detalles del producto seleccionado
+   * @param id {String} - Recibe id del producto
    */
   listProductId(id: string):Observable<any>{
     return this.http.get(`products/${id}?`)
+  }
+
+  /**
+   * Funcion para buscar el producto por su nombre
+   * @param name {String} - Recibe el nombre del producto a buscar
+   */
+  searchProducts(name: string){
+    return this.http.get(`products?search=${name}&`);
   }
 }

@@ -1,7 +1,8 @@
-ion-card{
-    border-radius: 27px;
+.cat-card{
+    border-radius: 20px;
     height: 200px;
     display: flex;
+    margin: 1px !important;
 }
 .catImage{
     position: absolute;
@@ -20,17 +21,73 @@ ion-card{
     text-align: center;
     display: inline-block;
 
-    font-weight: 600;
-    font-size: 40px;
+    font-weight: bold;
+    font-size: 50px;
     color: #FFFFFF;
     -webkit-text-stroke: 1px black;
     
 }
 ion-searchbar{
-    .searchbar-input-container{
-        .searchbar-input{
-            border-radius: 20px;
+    ::ng-deep{
+        .searchbar-input-container{            
+            .searchbar-input{ 
+                border-radius: 20px;
+                //any style that you want to implement on your searchbar
+                text-align: center;
+            }
         }
-    }
+    }   
 }
-
+//Busqueda
+.ion-card{
+    background: #FFFFFF;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: 1px !important;
+}
+.offert{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    background: #FE805C;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20px;
+    color: white;
+    font-weight: bold;
+}
+.textContainer{
+    padding: 8px;
+}
+img{
+    height: 160px;
+    width: 100%;
+}
+.tittle{
+    font-size: 12pt;
+    color: #FE805C;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+.subtittle{
+    font-weight: normal;
+    font-size: 10pt;
+    line-height: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.regular_price{
+    display: inline-block;
+    padding: 5px;
+    text-decoration:line-through;
+    
+}
+.price{
+    display: inline-block;
+    white-space: initial;
+    padding: 5px;
+}

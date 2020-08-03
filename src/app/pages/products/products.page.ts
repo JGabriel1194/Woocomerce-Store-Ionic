@@ -2,6 +2,7 @@ import { LoadingService } from './../../services/loading.service';
 import { ProductsService } from '../../services/products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -14,11 +15,13 @@ export class ProductsPage implements OnInit {
   catName: string;
   count: number;
   pages: number = 1;
+  quantity: String;
   constructor(
     private activatedRoute: ActivatedRoute, 
     private productsService: ProductsService,
     private loadigService: LoadingService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -27,11 +30,18 @@ export class ProductsPage implements OnInit {
     this.count = parseInt(this.activatedRoute.snapshot.paramMap.get('count'));
     this.loadigService.presentLoading('Cargando');
     this.listProductsCategory();
+    this.quantity = this.cartService.updateBadge().toString();
   }
 
   /**
-   * Listar productos por el id de la categoria
-   * @param id 
+   * Funcion para actualizar la notificación
+   */
+  ionViewWillEnter() {
+    this.quantity = this.cartService.updateBadge().toString();
+  }
+
+  /**
+   * Funcion para listar productos por su categoria
    */
   async listProductsCategory(){
     this.productsService.listProductsByCat(this.id,String(this.pages)).subscribe(
@@ -41,13 +51,12 @@ export class ProductsPage implements OnInit {
           this.loadigService.dismissLoading();
         }
         this.pages++;
-        console.log(this.products);
       }
     );
   }
 
   /**
-   * Metodo para cargar mas productos.
+   * Funcion para cargar 10 productos más.
    * @param event 
    */
   async loadMoreProducts(event){
@@ -64,7 +73,13 @@ export class ProductsPage implements OnInit {
       }
     },5000)
   }
+
+  /**
+   * Funcion para navegar al detalle del producto.
+   * @param id {String} - Recibe el id del producto
+   */
   clickProduct(id:string){
     this.router.navigate(['/details',id]);
-  }  
+  }
+  
 }
