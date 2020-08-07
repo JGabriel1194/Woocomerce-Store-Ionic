@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl:'https://104.215.97.218/wordpress',
-  consumerKey: 'ck_67132f23a73d124b84c4b4b4357e3931186f6948',
-  consumerSecret:'cs_9ada21cb7e8679a87d6f77cb81c3415e421fec9d',
+  apiUrl:'https://istalfonsoherrera.edu.ec/tienda',
+  consumerKey: 'ck_8f3ae945e403581e1d2aa7b803d2d438d1f98e95',
+  consumerSecret:'cs_a282063c14c834bb663f21183b987bac49141d1a',
   version:"wc/v3"
 };
