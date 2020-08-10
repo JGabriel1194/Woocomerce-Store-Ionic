@@ -27,6 +27,8 @@
                 {{product.name}}
             </div>
             <div class="sub-tittle" [innerHTML]="product.short_description" ></div>
+        </div>
+        <div class="information">
             <div class="price">
                 <div class="regular-price" *ngIf="product.regular_price != product.price" >
                     ${{product.regular_price}}
@@ -35,16 +37,15 @@
                 ${{product.price}}
                 </div>
             </div>
-        </div>
-        <div class="valoration">
-            <ion-select value="brown" okText="Ok" cancelText="Cancelar">
-            <ion-select-option value="1">1</ion-select-option>
-            <ion-select-option value="2">2</ion-select-option>
-            <ion-select-option value="3">3</ion-select-option>
-            <ion-select-option value="4">4</ion-select-option>
-            <ion-select-option value="5">5</ion-select-option>
-    </ion-select>
-        </div>         
+            <div class="quantity">
+                <ion-item>
+                    <ion-label>Cantidad</ion-label>
+                    <ion-select [(ngModel)]="selected_value">
+                      <ion-select-option *ngFor="let value of values" value="{{value}}" [selected]="selected_value == value">{{value}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </div>  
+        </div>     
     </div>
     </ion-card>
 </ion-content>

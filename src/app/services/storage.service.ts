@@ -32,7 +32,7 @@ export class StorageService {
   }
 
   /**
-   * Funcion para remover un ub objeto almacenado
+   * Funcion para remover un objeto almacenado
    * @param storageKey {String} - Identificador del objeto almacenado
    */
   async removeStorageItem(storageKey: string) {

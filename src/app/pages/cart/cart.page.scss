@@ -1,0 +1,77 @@
+.lista{
+    height: 50%;
+    overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    //box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+}
+ion-item {
+    --background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+    padding-top: 5px;
+    //border-radius: 10px;
+}
+ion-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+}
+.font{
+    font-style: bold;
+    font-weight: bold;
+    font-size: 12pt;
+    line-height: 20px;
+    /* identical to box height */
+    letter-spacing: 0.25px;
+    color: #FE805C;
+}
+.code{   
+    width:100%;
+    display:table;
+    vertical-align:middle;
+    padding-top: 10px;
+}
+.txtCode{
+    background: #C4C4C4;
+    border-radius: 10px;
+    color: black;
+    display:table-cell;
+    width: 80%;
+}
+.btnApply{
+    display:table-cell;
+    background: #8145FD;
+    border-radius: 10px;
+    color: white;
+    width: 20%;
+}
+
+.row{
+    width:100%;
+    display:table;
+    padding-top: 10px;
+    font-size: 12pt;
+    color: black;
+}
+.col1{
+    display:table-cell;
+    width: 90%;
+}
+.col2{
+    display:table-cell;
+    width: 10%;
+}
+.line{
+    height: 1px;
+    background-color: black;
+    top: 20px;
+}
+.btnShop{
+    height: 46px;
+    background: #8145FD;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}

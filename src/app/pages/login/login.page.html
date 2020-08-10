@@ -1,9 +1,83 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header title="INICIO" quantity="a"></app-header>
+<ion-segment (ionChange)="segmentChanged($event)" value="start">
+  <ion-segment-button value="start">
+    <ion-label>Iniciar Sesión</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="register">
+    <ion-label>Registrarse</ion-label>
+  </ion-segment-button>
+</ion-segment>
 <ion-content>
-
+  <ion-grid fixed>
+    <!-- formulario login -->
+    <div class="login" *ngIf="segment == 'start'">
+      <img src="./assets/icon/Logo.png">
+      <div class="txtBox">
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Usuario o email" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+      </div>
+      <div class="buttons">
+        <ion-button class="btnIniciar" (click)="loginCustomer()" expand="block" fill="clear" shape="round">
+          INICIAR
+        </ion-button>
+        <div class="space"></div>
+        <div>
+          o iniciar sesión con
+        </div>
+        <div class="space"></div>
+        <ion-button class="btnFacebook" (click)="clci()" expand="block" fill="clear" shape="round">
+          FACEBOOK
+        </ion-button>
+      </div>
+    </div>
+    <!-- formulario register -->
+    <div class="login" *ngIf="segment == 'register'">
+      <div class="txtBox">
+        <ion-item>
+          <ion-icon name="create" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Nombre" [(ngModel)]="register.first_name"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="create" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Apellido" [(ngModel)]="register.last_name"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Nombre de usuario" [(ngModel)]="register.username"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="e-mail" [(ngModel)]="register.email"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-input type="password" placeholder="Contraseña" [(ngModel)]="register.password"></ion-input>
+        </ion-item>
+      </div>
+      <div class="buttons">
+        <ion-button class="btnIniciar" (click)="registerCustomer()" expand="block" fill="clear" shape="round">
+          REGISTRARSE
+        </ion-button>
+        <div class="space"></div>
+        <div>
+          o registrate con
+        </div>
+        <div class="space"></div>
+        <ion-button class="btnFacebook" (click)="clci()" expand="block" fill="clear" shape="round">
+          FACEBOOK
+        </ion-button>
+      </div>
+    </div>
+  </ion-grid>
 </ion-content>

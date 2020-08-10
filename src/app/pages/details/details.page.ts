@@ -13,6 +13,8 @@ export class DetailsPage implements OnInit {
   id: string;
   images: any;
   quantity: number;
+  selected_value: any;
+  values: string[] = ['1','2','3','4','5','6','7','8','9','10'];
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductsService,
@@ -24,6 +26,7 @@ export class DetailsPage implements OnInit {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
     this.listDetails(this.id);
     this.updateCartBadge();
+    this.selected_value = '1';
   }
   /**
    * Funcion para listar los detalles de un produco
@@ -43,7 +46,7 @@ export class DetailsPage implements OnInit {
    * Funcion para añadir producto al carrito
    */
   addCart(){
-    this.cartService.addCart(this.product);
+    this.cartService.addCart(this.product,this.selected_value);
     this.updateCartBadge();
   }
 

@@ -35,14 +35,10 @@ ion-card{
     padding: 10px;
 }
 .information{
-    display: inline-block;
-    width: 85%;
+    display:table;
+    width: 100%;
 }
-.valoration{
-    display: inline-block;
-    width: 15%;
-    height: 100%;
-}
+
 .tittle{
     font-style: bold;
     font-weight: bold;
@@ -67,6 +63,8 @@ ion-card{
     line-height: 17px;
     letter-spacing: 0.25px;
     color: #000000;
+    display:table-cell;
+    width: 70%;
 }
 .regular-price{
     display: inline-block;
@@ -78,18 +76,19 @@ ion-card{
     white-space: initial;
     padding: 5px;
 }
-ion-select {
-    /* Applies to the value and placeholder color */
-    color: #545ca7;
-  
-    /* Set a different placeholder color */
-    --placeholder-color: #971e49;
-  
-    /* Set full opacity on the placeholder */
-    --placeholder-opacity: 1;
+.quantity{
     width: 100%;
-
-    justify-content: center;
+}
+ion-select {
+    width: 100%;
+    justify-content: right;
+    right: 0px;
+}
+ion-item {
+    --background: #FFFFFF;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
 .btnShop{
     height: 46px;
