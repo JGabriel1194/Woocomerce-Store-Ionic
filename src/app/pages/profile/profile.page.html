@@ -1,9 +1,81 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <div class="back-button"></div>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <div class="basket-button"></div>
+    <ion-title text-capitalize>PERFIL</ion-title>
+    <ion-buttons slot="end" (click)="goCart()">
+      <ion-button slot="end">
+        <ion-icon slot="icon-only" name="basket"></ion-icon>
+      </ion-button>
+      <ion-badge *ngIf="quantity != 0" color="danger">{{quantity}}</ion-badge>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div class="cover">
+    <img src="./assets/img/coverpage.jpg">
+    <div class="userData" *ngFor="let user of dataUser">
+      <img class="profile" src="{{user.avatar_url}}">
+      <ion-label class="lblUser">
+        <h1>{{user.first_name}} {{user.last_name}} </h1>
+        <h2>{{user.email}}</h2>
+      </ion-label>
+    </div>
+    <div class="orders">
+      <ion-card>
+        <ion-segment (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="completed">
+            <ion-icon name="home"></ion-icon>
+            <div class="label">
+              Completo
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="processing">
+            <ion-icon name="home"></ion-icon>
+            <div class="label">
+              Proceso
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="register">
+            <ion-icon name="home"></ion-icon>
+            <div class="label">
+              Espera
+            </div>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-card>
+    </div>
+  </div>
+  <div style="height: 50px;"></div>
+  <ion-grid>
+    <div class="list">
+      <ion-item detail [routerLink]="['/index']">
+        <ion-icon slot="start" name="home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      <ion-item detail [routerLink]="['/billing']">
+        <ion-icon slot="start" name="navigate"></ion-icon>
+        <ion-label>Dirección de envío</ion-label>
+      </ion-item>
+      <ion-item detail [routerLink]="['/shipping']">
+        <ion-icon slot="start" name="map"></ion-icon>
+        <ion-label>Dirección de facturación</ion-label>
+      </ion-item>
+      <ion-item detail [routerLink]="['/index']">
+        <ion-icon slot="start" name="settings"></ion-icon>
+        <ion-label>Configuración de la cuenta</ion-label>
+      </ion-item>
+      <ion-item detail [routerLink]="['/index']">
+        <ion-icon slot="start" name="people"></ion-icon>
+        <ion-label>Sobre nosotros</ion-label>
+      </ion-item>
+      <ion-item detail (click)="logout()">
+        <ion-icon slot="start" name="exit"></ion-icon>
+        <ion-label>Salir</ion-label>
+      </ion-item>
+    </div>
+  </ion-grid>
 </ion-content>

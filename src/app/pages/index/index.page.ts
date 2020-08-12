@@ -60,6 +60,9 @@ export class IndexPage implements OnInit {
     this.router.navigate(['/products',id,name,count]);
   }
 
+  clickProfile(){
+    this.router.navigate(['/profile']);
+  }
   /**
    * Funcion para buscar un producto
    * @param event {event} - Recibe un evento del cual extraeremos el value

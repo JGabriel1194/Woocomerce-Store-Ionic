@@ -1,12 +1,14 @@
 <app-header title="INICIO" quantity="a"></app-header>
-<ion-segment (ionChange)="segmentChanged($event)" value="start">
-  <ion-segment-button value="start">
-    <ion-label>Iniciar Sesión</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="register">
-    <ion-label>Registrarse</ion-label>
-  </ion-segment-button>
-</ion-segment>
+<ion-toolbar class="toolbar">
+  <ion-segment (ionChange)="segmentChanged($event)" value="start">
+    <ion-segment-button value="start">
+      <ion-label>Iniciar Sesión</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="register">
+      <ion-label>Registrarse</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 <ion-content>
   <ion-grid fixed>
     <!-- formulario login -->

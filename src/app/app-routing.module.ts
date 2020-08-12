@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProfileGuard } from './guards/profile.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
@@ -21,15 +23,26 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule),
+    canActivate: [ProfileGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [LoginGuard]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [ProfileGuard]
+  },
+  {
+    path: 'billing',
+    loadChildren: () => import('./pages/billing/billing.module').then( m => m.BillingPageModule)
+  },
+  {
+    path: 'shipping',
+    loadChildren: () => import('./pages/shipping/shipping.module').then( m => m.ShippingPageModule)
   },
 ];
 

@@ -1,0 +1,109 @@
+//Stilos del header
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    position: absolute; 
+}
+ion-content {
+    --background: #ffffff;
+}
+@media screen and (orientation:portrait) {
+    .cover{
+        width: 100%;
+        height: 30%;
+        position: relative; 
+    }
+    .orders{
+        top:80%;
+        width: 100%;
+        position: absolute;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+}
+@media screen and (orientation:landscape) {
+    .cover{
+        width: 100%;
+        height: 50%;
+        position: relative; 
+    }
+    .orders{
+        top:80%;
+        width: 100%;
+        position: absolute;
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
+img{
+    border-radius: 0px 0px 30px 30px;
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+}
+.userData{
+    padding: 20px;
+    padding-top: 40px;
+    top: 20px;
+    width: 100%;
+    height: 40px;
+    color: #9E9E9E;
+    position: relative;
+    display:table;
+    font-weight: bold
+}
+ion-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 60px !important;
+    display: inline-block;
+}
+.profile{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px !important;
+    display: inline-block;
+}
+.lblUser{
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+    top: 10px;
+    left: 90px;
+    position: relative;
+}
+.label{
+    margin-top: -10px !important; 
+    color: #FE805C;
+    font-size: 12px;
+    line-height: 17px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.25px;
+}
+ion-card {
+    --background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 5px;
+}
+ion-segment-button {
+    --color-checked: ;
+    --indicator-transition: background-color 15ms linear;
+    --transition: background-color 15ms linear;
+    color: #9E9E9E;
+}
+.list{
+    overflow-y: scroll;
+    height: 100%;
+}
+ion-item {
+    --background: white;
+    --background-activated-opacity: 1;
+    color: #9E9E9E;
+}
+
+
+

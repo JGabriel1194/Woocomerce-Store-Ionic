@@ -1,0 +1,45 @@
+<app-header title="ENVÍO" quantity="a"></app-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <div class="form">
+      <h3>Dirección de envío</h3>
+      <div class="txtBox">
+        <ion-item>
+          <ion-icon name="globe" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Pais" value="Ecuador"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="map" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Provincia"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="navigate" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Ciudad"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="locate" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Dirección"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="call" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Teléfono"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="barcode" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Codigo postal"></ion-input>
+        </ion-item>
+      </div>
+      <div class="buttons">
+        <ion-button class="btnGuardar" (click)="registerCustomer()" expand="block" fill="clear" shape="round">
+          GUARDAR
+        </ion-button>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>

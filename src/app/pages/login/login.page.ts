@@ -1,6 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { AuthConstants } from 'src/app/config/auth-constants';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +23,23 @@ export class LoginPage implements OnInit {
     first_name:'',
     last_name: '',
     username:'',
-    password:''
+    password:'',
+    billing:{
+      first_name:'',
+      last_name:'',
+      email:''
+    },
+    shipping:{
+      first_name:'',
+      last_name:'',
+    }
   }
   constructor(
     private alertService: AlertService,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService,
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -53,6 +69,11 @@ export class LoginPage implements OnInit {
     let last_name = this.register.last_name.trim();
     let username = this.register.username.trim();
     let password = this.register.password.trim();
+    this.register.billing.first_name = first_name;
+    this.register.billing.last_name = last_name;
+    this.register.billing.email = email;
+    this.register.shipping.first_name = first_name;
+    this.register.shipping.last_name = last_name;
     return (
       this.register.email &&
       this.register.first_name &&
@@ -83,6 +104,9 @@ export class LoginPage implements OnInit {
         (res: any)=>{
           if(res.statusCode == 200){
             console.log(res);
+            this.storageService.storageData(AuthConstants.AUTH,res.data);
+            this.userService.setEmail(res.data.email);
+            this.router.navigate(['/profile']);
           }else{
             console.log(res);
             this.alertService.presentAlert('Error',res.message);

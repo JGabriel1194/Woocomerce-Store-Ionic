@@ -1,16 +1,7 @@
-ion-segment-button {
-    --color-checked: #8145FD;
-    --color-focused: #8145FD;
-    --indicator-transition: background-color 15ms linear;
-    --transition: background-color 15ms linear;
-}
-.toolbar{
-    --background: #ffffff;
-}
 ion-content {
     --background: #ffffff;
 }
-.login{
+.form{
     height: 100%;
     width: 100%;
     text-align: center;
@@ -26,10 +17,7 @@ ion-content {
 
     color: #2F2F2F;
 }
-img{
-    width: 150px;
-    height: 100px;
-}
+
 .txtBox{
     padding-top: 20px;
 }
@@ -46,15 +34,8 @@ ion-item{
     padding-top: 30px;
 
 }
-.btnIniciar{
+.btnGuardar{
     background: #8145FD;
-    border-radius: 10px;
-    color: white;
-    height: 46px;
-    font-weight: bold;
-}
-.btnFacebook{
-    background: #0989FF;
     border-radius: 10px;
     color: white;
     height: 46px;

@@ -82,6 +82,7 @@ export class CartService {
         console.log(this.cart);
       },
       err =>{
+        this.cart = [];
         console.log('error');
       }
     )

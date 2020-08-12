@@ -50,10 +50,16 @@ export class DetailsPage implements OnInit {
     this.updateCartBadge();
   }
 
+  /**
+   * Funcion para actualizar la notificacion
+   */
   updateCartBadge(){
     this.quantity = this.cartService.updateBadge();
   }
 
+  /**
+   * Funcion para ir al carrito
+   */
   goCart(){
     this.router.navigate(['/cart']);
   }
