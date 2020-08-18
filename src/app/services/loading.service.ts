@@ -7,13 +7,13 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class LoadingService {
 
-  loading:any;
+  private loading:any;
 
   constructor(private loadingController: LoadingController) { }
 
   /**
    * Metodo para iniciar la carga de datos
-   * @message {String} - Recibe el mesaje que se mostrara en la carga
+   * @param {String} message - Recibe el mesaje que se mostrara en la carga
    */
   async presentLoading(message:string) {
     this.loading = await this.loadingController.create({

@@ -30,10 +30,13 @@ export class IndexPage implements OnInit {
     this.loadCategories();
     this.cartService.loadStorage();
     this.quantity = this.cartService.updateBadge().toString();
-    
   }
 
+  /**
+   * Funcion para actualizar la notificación
+   */
   ionViewWillEnter() {
+    this.cartService.loadStorage();
     this.quantity = this.cartService.updateBadge().toString();
   }
 

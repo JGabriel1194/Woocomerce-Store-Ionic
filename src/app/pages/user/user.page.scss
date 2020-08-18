@@ -1,0 +1,42 @@
+ion-content {
+    --background: #ffffff;
+}
+.login{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    padding-top: 10px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+    overflow-y: scroll;
+    text-align: center;
+    letter-spacing: 0.25px;
+
+    color: #2F2F2F;
+}
+.txtBox{
+    padding-top: 20px;
+}
+ion-item{
+    --background: #FFFFFF;
+    border-radius: 10px;
+    --highlight-color-valid: #8145FD; // valid underline color
+}
+
+.space{
+    height: 10px;
+}
+.buttons{
+    padding-top: 30px;
+
+}
+.btnIniciar{
+    background: #8145FD;
+    border-radius: 10px;
+    color: white;
+    height: 46px;
+    font-weight: bold;
+}

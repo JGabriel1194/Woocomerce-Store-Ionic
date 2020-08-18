@@ -6,57 +6,26 @@ import { HttpService } from './http.service';
 })
 export class UserService {
 
-  private email: string;
-  user = {
-    email: "",
-    first_name: "",
-    last_name: "",
-    username: "",
-    billing: {
-      first_name: "",
-      last_name: "",
-      company: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      state: "",
-      postcode: "",
-      country: "",
-      email: "",
-      phone: ""
-    },
-    shipping: {
-      first_name: "",
-      last_name: "",
-      company: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      state: "",
-      postcode: "",
-      country: ""
-    }
-  };
 
   constructor(
     private http: HttpService
   ) { }
 
-  loadUser(){
-    return this.http.get(`customers?search=${this.user.email}&`)
-  }
   /**
-   * Enviar email de usuario
-   * @param email 
+   * 
+   * @param {String} email - Recibe el email del usuario 
    */
-  setEmail(email){
-    this.user.email = email;
+  loadUser(email: string){
+    return this.http.get(`customers?search=${email}&`)
   }
 
   /**
-   * Obtener email de usuario
+   * Función para actualizar los datos de un cliente 
+   * @param {String} id - Recibe el id del cliente 
+   * @param {Object} data - Recibe los datos a actualizar del cliente
    */
-  getEmail(){
-    return this.user.email;
+  putData(id: string, data: any){
+    return this.http.put(`customers/${id}?`,data);
   }
+
 }

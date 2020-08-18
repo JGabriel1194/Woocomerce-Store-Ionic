@@ -49,8 +49,8 @@ export class ProfilePage implements OnInit {
   loadUser(){
     this.storageService.get(AuthConstants.AUTH).then(
       (res: any) =>{
-        this.userService.setEmail(res.email);
-        this.userService.loadUser().subscribe(
+        
+        this.userService.loadUser(res.email).subscribe(
           (res: any)=>{
             this.dataUser = res;
             console.log(res)

@@ -39,10 +39,6 @@
             <div class="col1">Costo de envío</div>
             <div class="col2">${{shipping}}</div>
         </div>
-        <div class="row">
-            <div class="col1">Iva</div>
-            <div class="col2">${{iva}}</div>
-        </div>
         <div class="line"></div>
         <div class="row">
             <div class="col1">Pedido Total</div>
@@ -53,7 +49,7 @@
 
 </ion-content>
 <ion-footer>
-    <ion-button class="btnShop" (click)="addCart()" expand="block" fill="clear" shape="round">
+    <ion-button class="btnShop" (click)="shop()" expand="block" fill="clear" shape="round">
         COMPRAR
     </ion-button>
 </ion-footer>

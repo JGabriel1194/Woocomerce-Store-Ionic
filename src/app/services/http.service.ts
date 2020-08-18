@@ -40,8 +40,10 @@ export class HttpService {
     return this.http.post(url,data);
   }
 
-  put(){
-
+  put(serviceName: string, data: any){
+    const url = `${environment.apiUrl}/wp-json/${environment.version}/${serviceName}consumer_key=${environment.consumerKey}&consumer_secret=${environment.consumerSecret}`
+  
+    return this.http.post(url,data);
   }
 
   delete(){

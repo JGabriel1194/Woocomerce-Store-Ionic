@@ -4,17 +4,34 @@ import { AlertService } from './alert.service';
 import { ToastService } from './toast.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private cart: any [] = [];
+  private shop = {
+    payment_method: "bacs",
+    payment_method_title: "Direct Bank Transfer",
+    set_paid: true,
+    billing:'',
+    shipping:'',
+    line_items:'',
+    shipping_lines: [
+      {
+        method_id: "flat_rate",
+        method_title: "Flat Rate",
+        total: 10
+      }
+    ]
+  }
   constructor(
     private storageService: StorageService,
     private alertService: AlertService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private http: HttpService
   ) { }
 
   /**
@@ -65,6 +82,9 @@ export class CartService {
     return this.cart.length;
   }
   
+  /**
+   * Funcion para eliminar los productos del carrito
+   */
   emptyCart(){
     this.storageService.removeStorageItem('data').then(res=>{
       this.cart = [];
@@ -83,12 +103,18 @@ export class CartService {
       },
       err =>{
         this.cart = [];
-        console.log('error');
       }
     )
   }
 
+  /**
+   * Funcion para actualizar 
+   */
   updateStorage(){
     this.storageService.storageData("data",this.cart);
+  }
+
+  createOrder(data: any){
+    return this.http.post(`orders?`,data);
   }
 }

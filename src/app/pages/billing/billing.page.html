@@ -1,42 +1,42 @@
-<app-header title="ENVÍO" quantity="a"></app-header>
+<app-header title="FACTURACIÓN" quantity="a"></app-header>
 
 <ion-content>
   <ion-grid fixed>
     <div class="form">
-      <h3>Dirección de envío</h3>
+      <h3>Dirección de facturación</h3>
       <div class="txtBox">
         <ion-item>
           <ion-icon name="globe" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Pais" value="Ecuador"></ion-input>
+          <ion-input type="text" placeholder="Pais" [(ngModel)]="data.billing.country"></ion-input>
         </ion-item>
         <div class="space"></div>
         <ion-item>
           <ion-icon name="map" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Provincia"></ion-input>
+          <ion-input type="text" placeholder="Provincia" [(ngModel)]="data.billing.state"></ion-input>
         </ion-item>
         <div class="space"></div>
         <ion-item>
           <ion-icon name="navigate" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Ciudad"></ion-input>
+          <ion-input type="text" placeholder="Ciudad" [(ngModel)]="data.billing.city"></ion-input>
         </ion-item>
         <div class="space"></div>
         <ion-item>
           <ion-icon name="locate" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Dirección"></ion-input>
+          <ion-input type="text" placeholder="Dirección" [(ngModel)]="data.billing.address_1"></ion-input>
         </ion-item>
         <div class="space"></div>
         <ion-item>
           <ion-icon name="call" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Teléfono"></ion-input>
+          <ion-input type="text" placeholder="Teléfono" [(ngModel)]="data.billing.phone"></ion-input>
         </ion-item>
         <div class="space"></div>
         <ion-item>
           <ion-icon name="barcode" slot="start"></ion-icon>
-          <ion-input type="text" placeholder="Codigo postal"></ion-input>
+          <ion-input type="text" placeholder="Codigo postal" [(ngModel)]="data.billing.postcode"></ion-input>
         </ion-item>
       </div>
       <div class="buttons">
-        <ion-button class="btnGuardar" (click)="registerCustomer()" expand="block" fill="clear" shape="round">
+        <ion-button class="btnGuardar" (click)="saveBilling()" expand="block" fill="clear" shape="round">
           GUARDAR
         </ion-button>
       </div>

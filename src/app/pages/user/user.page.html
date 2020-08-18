@@ -1,0 +1,31 @@
+<app-header title="USUARIO" quantity="a"></app-header>
+
+<ion-content>
+  <ion-grid>
+    <!-- formulario register -->
+    <div class="login">
+      <div class="txtBox">
+        <ion-item>
+          <ion-icon name="create" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Nombre" [(ngModel)]="register.first_name"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="create" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Apellido" [(ngModel)]="register.last_name"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Nombre de usuario" [(ngModel)]="register.username"></ion-input>
+        </ion-item>
+        <div class="space"></div>
+      </div>
+      <div class="buttons">
+        <ion-button class="btnIniciar" (click)="saveData()" expand="block" fill="clear" shape="round">
+          GUARDAR
+        </ion-button>
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>

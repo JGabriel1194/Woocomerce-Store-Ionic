@@ -5,6 +5,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
-    private userService: UserService
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
@@ -100,20 +101,25 @@ export class LoginPage implements OnInit {
    */
   loginCustomer(){
     if(this.validateCustomer()){
+      this.loadingService.presentLoading('Iniciando')
       this.authService.login(this.user).subscribe(
         (res: any)=>{
-          if(res.statusCode == 200){
-            console.log(res);
-            this.storageService.storageData(AuthConstants.AUTH,res.data);
-            this.userService.setEmail(res.data.email);
-            this.router.navigate(['/profile']);
-          }else{
-            console.log(res);
-            this.alertService.presentAlert('Error',res.message);
+          if(res){
+            this.loadingService.dismissLoading();
+            if(res.statusCode == 200){
+              console.log(res);
+              this.storageService.storageData(AuthConstants.AUTH,res.data);
+              
+              this.router.navigate(['/profile']);
+            }else{
+              console.log(res);
+              this.alertService.presentAlert('Error',res.message);
+            }
           }
         },
         (err)=>{
-          console.log('login error ',err);
+          this.loadingService.dismissLoading();
+          this.alertService.presentAlert('Error',err.error.message);
         }
       )
     }else{
@@ -127,16 +133,19 @@ export class LoginPage implements OnInit {
    */
   registerCustomer(){
     if(this.validateRegister()){
+      this.loadingService.presentLoading('Registrando')
       this.authService.register(this.register).subscribe(
         (res: any)=>{
-          this.user.username = res.username;
-          this.user.password = this.register.password;
-          this.loginCustomer(); 
+          if(res){
+            this.loadingService.dismissLoading();
+            this.user.username = res.username;
+            this.user.password = this.register.password;
+            this.loginCustomer();
+          } 
         },
         (err: any)=>{
-          console.log(err);
+          this.loadingService.dismissLoading();
           this.alertService.presentAlert('Error',err.error.message);
-          
         }
       )
     }else{
