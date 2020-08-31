@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../services/products.service';
 import { CartService } from 'src/app/services/cart.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-details',
@@ -19,7 +20,8 @@ export class DetailsPage implements OnInit {
     private activateRoute: ActivatedRoute,
     private productService: ProductsService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
@@ -33,11 +35,14 @@ export class DetailsPage implements OnInit {
    * @param id {String} - id del producto
    */
   listDetails(id: string){
+    this.loadingService.presentLoading('Cargando');
     this.productService.listProductId(id).subscribe(
       (res: any)=>{
-        this.product = res;
-        this.images=this.product.images;
-        console.log(this.product);
+        if(res){
+          this.product = res;
+          this.images=this.product.images;
+          this.loadingService.dismissLoading();
+        }
       }
     )
   }

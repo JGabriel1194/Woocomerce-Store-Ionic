@@ -37,16 +37,20 @@ const routes: Routes = [
     canActivate: [ProfileGuard]
   },
   {
-    path: 'billing',
+    path: 'billing/:back',
     loadChildren: () => import('./pages/billing/billing.module').then( m => m.BillingPageModule)
   },
   {
-    path: 'shipping',
+    path: 'shipping/:back',
     loadChildren: () => import('./pages/shipping/shipping.module').then( m => m.ShippingPageModule)
   },
   {
     path: 'user',
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'orders/:order',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
   },
 ];
 

@@ -4,7 +4,7 @@ import { AuthConstants } from 'src/app/config/auth-constants';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-billing',
@@ -25,14 +25,17 @@ export class BillingPage implements OnInit {
       phone: ''
     }
   }
+  back: string;
   constructor(
     private storageService: StorageService,
     private userService: UserService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.back = this.activatedRoute.snapshot.paramMap.get('back');
     this.loadUser();
   }
 
@@ -40,12 +43,14 @@ export class BillingPage implements OnInit {
    * Funcion para cargar los datos del usuario
    */
   loadUser(){
+    this.loadingService.presentLoading('Cargando');
     this.storageService.get(AuthConstants.AUTH).then(
       (res: any) =>{
         this.userService.loadUser(res.email).subscribe(
           (res: any)=>{
             if(res){
               this.data = {billing:res[0].billing};
+              this.loadingService.dismissLoading();
             }
           }
         );
@@ -61,7 +66,7 @@ export class BillingPage implements OnInit {
           (res ) =>{
             if(res){
               this.loadingService.dismissLoading();
-              this.router.navigate(['/profile']);
+              this.router.navigate([`/${this.back}`]);
             }
           }
         );

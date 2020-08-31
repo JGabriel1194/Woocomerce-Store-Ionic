@@ -7,6 +7,9 @@ import { AuthConstants } from 'src/app/config/auth-constants';
 import { UserService } from 'src/app/services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { OrdersService } from 'src/app/services/orders.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -18,8 +21,9 @@ export class CartPage implements OnInit {
   selected_value: any;
   values: string[] = ['1','2','3','4','5','6','7','8','9','10'];
   subTotal: any = 0;
-  shipping: any = 0;
+  shipping: any = 2;
   total: any = 0;
+  cupoun: string;
   order = {
     payment_method: "bacs",
     payment_method_title: "Direct Bank Transfer",
@@ -33,7 +37,8 @@ export class CartPage implements OnInit {
         method_title: "Flat Rate",
         total: '2'
       }
-    ]
+    ],
+    coupon_lines:[]
   }
   constructor(
     private storageService: StorageService,
@@ -41,7 +46,10 @@ export class CartPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private toastService: ToastService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private orderService: OrdersService,
+    private alerService: AlertService,
+    private actionSheet: ActionSheetController
   ) { }
 
   ngOnInit() {
@@ -56,7 +64,7 @@ export class CartPage implements OnInit {
     this.storageService.get('data').then(
       (res: any)=>{
         this.cartList = res;
-        console.log('Hola',this.cartList);
+        console.log('Hola',this.cartList.length);
         this.calculate();
       }
     )
@@ -68,6 +76,7 @@ export class CartPage implements OnInit {
   calculate(){
     this.subTotal = 0;
     for(var i = 0; i < this.cartList.length; i++){
+      console.log(i)
       this.subTotal = this.cartList[i].total + this.subTotal;
     }
     this.total = this.subTotal + this.shipping;
@@ -99,6 +108,54 @@ export class CartPage implements OnInit {
     this.cartService.emptyCart();
   }
 
+  validateInput(){
+    let cupoun = this.cupoun;
+    return (this.cupoun &&
+    cupoun.length > 0)
+  }
+
+  /**
+   * Metodo para aplicar un descuento
+   * @param code recibe el codigo del cupon
+   */
+  aplyDiscount(){
+    let myDate = new Date().toISOString();
+    if(this.validateInput()){
+      this.loadingService.presentLoading('Aplicando');
+      this.cartService.getCupoun(this.cupoun).subscribe(
+        (res: any)=>{
+          if(res){
+            this.loadingService.dismissLoading();
+            //Comparamos la fecha actual con la fecha de caducidad del cupon de descuento
+            if(myDate >= res[0].date_expires){
+              this.alerService.presentAlert('Error','El cupon a caducado');
+            }else{
+              //Validamos si el cupon aun tiene usos disponibles
+              if(res[0].usage_count <= res[0].usage_limit || res[0].usage_limit == null){
+                let discount = (this.total * res[0].amount) / 100;
+                this.total = this.total - discount;
+                this.order.coupon_lines.push({
+                  "code":this.cupoun
+                })
+                this.toastService.presentToast('Descuento aplicado con éxito');
+              }else{
+                this.alerService.presentAlert('Error','Se ha alcanzado el limite de uso de este cupon')
+              }
+            }
+          }
+        },
+        (err)=>{
+          this.loadingService.dismissLoading();
+          this.alerService.presentAlert('Error',err.error.message)
+        }
+      )
+    }else{
+      this.alerService.presentAlert('Error','Campo vacio')
+    }
+  }
+  /**
+   * Metodo para reamilzar la compra
+   */
   shop(){
     this.loadingService.presentLoading('Procesando');
     this.storageService.get(AuthConstants.AUTH).then(
@@ -115,7 +172,7 @@ export class CartPage implements OnInit {
                 })
               }
               console.log('22',this.order)
-              this.cartService.createOrder(this.order).subscribe(
+              this.orderService.createOrder(this.order).subscribe(
                 (res)=>{
                   if(res){
                     this.loadingService.dismissLoading();
@@ -125,7 +182,8 @@ export class CartPage implements OnInit {
                   }
                 },
                 (err) =>{
-                  console.log(err);
+                  this.loadingService.dismissLoading();
+                  this.alerService.presentAlert('Error',err.error.message);
                 }
               );
             }
@@ -133,5 +191,56 @@ export class CartPage implements OnInit {
         );
       }
     )
+  }
+
+  /**
+   * Funcion para comtrolar el segment
+   * @param event recive el evento del segmento seleccionado
+   */
+  selectSegment(event){
+    if(event.detail.value == 'shipping'){
+      this.router.navigate(['/shipping/cart']);
+    }
+    if(event.detail.value == 'billing'){
+      this.router.navigate(['/billing/cart']);
+    }
+    if(event.detail.value == 'pay'){
+      this.presentActionSheet();
+    }
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheet.create({
+      header: 'Metodos de pago',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Contra reembolso',
+        role: 'destructive',
+        icon: 'wallet',
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      }, {
+        text: 'Deposito cuenta bancaria',
+        icon: 'cash-outline',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'Tarjeta de crédito',
+        icon: 'Card',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 }

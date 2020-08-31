@@ -49,7 +49,6 @@ export class ProfilePage implements OnInit {
   loadUser(){
     this.storageService.get(AuthConstants.AUTH).then(
       (res: any) =>{
-        
         this.userService.loadUser(res.email).subscribe(
           (res: any)=>{
             this.dataUser = res;
@@ -65,5 +64,19 @@ export class ProfilePage implements OnInit {
    */
   goCart(){
     this.router.navigate(['/cart']);
+  }
+
+  orderStatus( event){
+    if(event.detail.value == 'completed'){
+      this.router.navigate(['/orders/completed']);
+    }else{
+      if(event.detail.value == 'processing'){
+        this.router.navigate(['/orders/processing']);
+      }else{
+        if(event.detail.value == 'on-hold'){
+          this.router.navigate(['/orders/on-hold']);
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,31 @@
+<app-header title="{{Tittle}}" quantity="a"></app-header>
+
+<ion-content>
+    <div style="height: 10px;"></div>
+    <ion-grid>
+        <ion-item>
+            <ion-label>
+               <p>Orden N°</p>
+            </ion-label>
+            <ion-label class="ion-text-center">
+                <p>Fecha</p>
+            </ion-label>
+            <ion-label class="ion-text-right">
+                <p>Total</p>
+            </ion-label>
+        </ion-item>
+        <div class="list">
+            <ion-item *ngFor="let order of orders">
+                <ion-label>
+                   <h2>#{{order.number}}</h2>
+                </ion-label>
+                <ion-label class="ion-text-center">
+                    <h2>{{order.date_created.substr(0, 10)}}</h2>
+                </ion-label>
+                <ion-label class="ion-text-right">
+                    <h2>${{order.total}}</h2>
+                </ion-label>
+            </ion-item>
+        </div>
+    </ion-grid>
+</ion-content>

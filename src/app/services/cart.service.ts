@@ -50,7 +50,7 @@ export class CartService {
         'price': product.price,
         'total': total,
         'img': product.images[0].src,
-        'quantity':1
+        'quantity':quantity
       });
       this.storageService.storageData("data",this.cart);
       this.toastService.presentToast('Añadido correctamente');
@@ -114,7 +114,11 @@ export class CartService {
     this.storageService.storageData("data",this.cart);
   }
 
-  createOrder(data: any){
-    return this.http.post(`orders?`,data);
+  /**
+   * Metodo para buscar un cupon
+   * @param {String} code recibe un codigo de cupon
+   */
+  getCupoun(code: string){
+    return this.http.get(`coupons?search=${code}&`);
   }
 }

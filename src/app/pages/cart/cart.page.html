@@ -7,45 +7,67 @@
                 <ion-thumbnail slot="start">
                     <ion-img [src]="list.img"></ion-img>
                 </ion-thumbnail>
-                  <ion-label>
-                        <h2>{{list.name}}</h2>
-                        <p>${{list.price}}</p>
-                  </ion-label>
+                <ion-label>
+                    <h2>{{list.name}}</h2>
+                    <p>${{list.price}}</p>
+                </ion-label>
                 <ion-button (click)="deleteProduct(list.id)" expand="block" fill="clear" shape="round" large>
                     <ion-icon name="trash"></ion-icon>
                 </ion-button>
             </ion-item>
         </ion-list>
     </div>
-   <ion-card>
-       <div class="font">
-        Codigo de descuento
-       </div>
-       <div class="code">
-            <ion-input class="txtCode" type="text" placeholder="CÓDIGO DE DESCUENTO"></ion-input>        
+    <ion-card>
+        <div class="code">
+            <ion-input class="txtCode" type="text" placeholder="CÓDIGO DE DESCUENTO" [(ngModel)]="cupoun"></ion-input>
             &nbsp;
-            <ion-button class="btnApply" (click)="emptyCart()"  expand="block" fill="clear" shape="round">
+            <ion-button class="btnApply" (click)="aplyDiscount()" expand="block" fill="clear" shape="round">
                 APLICAR
             </ion-button>
         </div>
-   </ion-card>
-   <ion-card class="total">
-    <div class="container">
-        <div class="row">
-            <div class="col1">Total Parcial</div>
-            <div class="col2">${{subTotal}}</div>
+    </ion-card>
+    <ion-card>
+        <!-- <div class="font">
+            Codigo de descuento
+        </div> -->
+        <ion-segment (ionChange)="selectSegment($event)">
+            <ion-segment-button value="shipping">
+                <ion-icon name="navigate"></ion-icon>
+                <div class="label">
+                    Envio
+                </div>
+            </ion-segment-button>
+            <ion-segment-button value="billing">
+                <ion-icon name="map"></ion-icon>
+                <div class="label">
+                    Facturación
+                </div>
+            </ion-segment-button>
+            <ion-segment-button value="pay">
+                <ion-icon name="card"></ion-icon>
+                <div class="label">
+                    Pago
+                </div>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-card>
+    <ion-card class="total">
+        <div class="container">
+            <div class="row">
+                <div class="col1">Total Parcial</div>
+                <div class="col2">${{subTotal}}</div>
+            </div>
+            <div class="row">
+                <div class="col1">Costo de envío</div>
+                <div class="col2">${{shipping}}</div>
+            </div>
+            <div class="line"></div>
+            <div class="row">
+                <div class="col1">Pedido Total</div>
+                <div class="col2">${{total}}</div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col1">Costo de envío</div>
-            <div class="col2">${{shipping}}</div>
-        </div>
-        <div class="line"></div>
-        <div class="row">
-            <div class="col1">Pedido Total</div>
-            <div class="col2">${{total}}</div>
-        </div>
-    </div>
-   </ion-card>
+    </ion-card>
 
 </ion-content>
 <ion-footer>

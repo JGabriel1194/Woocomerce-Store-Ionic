@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { LoadingService } from 'src/app/services/loading.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthConstants } from 'src/app/config/auth-constants';
 
 @Component({
@@ -24,15 +24,17 @@ export class ShippingPage implements OnInit {
       phone: ''
     }
   }
-
+  back: string;
   constructor(
     private storageService: StorageService,
     private userService: UserService,
     private loadingService: LoadingService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.back = this.activatedRoute.snapshot.paramMap.get('back');
     this.loadUser();
   }
 
@@ -40,12 +42,14 @@ export class ShippingPage implements OnInit {
    * Funcion para cargar los datos del usuario
    */
   loadUser(){
+    this.loadingService.presentLoading('Cargando');
     this.storageService.get(AuthConstants.AUTH).then(
       (res: any) =>{
         this.userService.loadUser(res.email).subscribe(
           (res: any)=>{
             if(res){
               this.data = {shipping:res[0].shipping};
+              this.loadingService.dismissLoading();
             }
           }
         );
@@ -61,7 +65,7 @@ export class ShippingPage implements OnInit {
           (res ) =>{
             if(res){
               this.loadingService.dismissLoading();
-              this.router.navigate(['/profile']);
+              this.router.navigate([`/${this.back}`]);
             }
           }
         );

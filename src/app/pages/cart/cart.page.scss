@@ -1,5 +1,5 @@
 .lista{
-    height: 50%;
+    height: 46%;
     overflow-y: scroll;
     padding-left: 10px;
     padding-right: 10px;
@@ -74,4 +74,11 @@ ion-card {
     border-radius: 10px;
     color: white;
     font-weight: bold;
+}
+ion-segment-button {
+    --color-checked: ;
+    --indicator-transition: background-color 15ms linear;
+    --transition: background-color 15ms linear;
+    //color: #9E9E9E;
+    height: 60px;
 }
