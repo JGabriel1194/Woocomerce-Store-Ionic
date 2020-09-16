@@ -9,7 +9,7 @@
                 </ion-thumbnail>
                 <ion-label>
                     <h2>{{list.name}}</h2>
-                    <p>${{list.price}}</p>
+                    <p>${{list.price}} x {{list.quantity}}</p>
                 </ion-label>
                 <ion-button (click)="deleteProduct(list.id)" expand="block" fill="clear" shape="round" large>
                     <ion-icon name="trash"></ion-icon>

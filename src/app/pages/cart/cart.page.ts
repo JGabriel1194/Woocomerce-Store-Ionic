@@ -64,7 +64,7 @@ export class CartPage implements OnInit {
     this.storageService.get('data').then(
       (res: any)=>{
         this.cartList = res;
-        console.log('Hola',this.cartList.length);
+        console.log('Hola',this.cartList);
         this.calculate();
       }
     )

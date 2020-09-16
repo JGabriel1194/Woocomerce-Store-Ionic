@@ -15,7 +15,8 @@ export class DetailsPage implements OnInit {
   images: any;
   quantity: number;
   selected_value: any;
-  values: string[] = ['1','2','3','4','5','6','7','8','9','10'];
+  cantidad: any;
+  values: string[] = ['XS','S','M','L','XL'];
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductsService,
@@ -28,7 +29,8 @@ export class DetailsPage implements OnInit {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
     this.listDetails(this.id);
     this.updateCartBadge();
-    this.selected_value = '1';
+    this.selected_value = 'M';
+    this.cantidad= 1;
   }
   /**
    * Funcion para listar los detalles de un produco
@@ -51,7 +53,7 @@ export class DetailsPage implements OnInit {
    * Funcion para añadir producto al carrito
    */
   addCart(){
-    this.cartService.addCart(this.product,this.selected_value);
+    this.cartService.addCart(this.product,this.cantidad);
     this.updateCartBadge();
   }
 
@@ -67,5 +69,13 @@ export class DetailsPage implements OnInit {
    */
   goCart(){
     this.router.navigate(['/cart']);
+  }
+
+  add(){
+    this.cantidad = this.cantidad + 1;
+  }
+
+  remove(){
+    this.cantidad = this.cantidad - 1;
   }
 }

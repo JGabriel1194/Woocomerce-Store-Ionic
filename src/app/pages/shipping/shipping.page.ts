@@ -4,6 +4,14 @@ import { UserService } from 'src/app/services/user.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthConstants } from 'src/app/config/auth-constants';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation
+} from "@ionic-native/google-maps";
 
 @Component({
   selector: 'app-shipping',
@@ -57,6 +65,9 @@ export class ShippingPage implements OnInit {
     )
   }
 
+  /**
+   * Funcion para guardar los datos
+   */
   saveData(){
     this.loadingService.presentLoading('Guardando');
     this.storageService.get(AuthConstants.AUTH).then(

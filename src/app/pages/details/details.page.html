@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
     <ion-toolbar>
         <div class="back-button"></div>
-        <ion-buttons  slot="start">
+        <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
         <div class="basket-button"></div>
@@ -14,39 +14,58 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-slides mode="ios" pager="ios" scrollbar="ios" >
-        <ion-slide *ngFor="let image of images" >
-            <img class="imgSlide" [src]="image.src" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded">
+    <ion-slides mode="ios" pager="ios" scrollbar="ios">
+        <ion-slide *ngFor="let image of images">
+            <img class="imgSlide" [src]="image.src" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
+                [hidden]="!loaded">
             <ion-spinner [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
         </ion-slide>
     </ion-slides>
-    <ion-card>
+    <ion-card *ngIf="product.name">
         <div>
-        <div class="information">
-            <div class="tittle">
-                {{product.name}}
+            <div class="information">
+                <div class="tittle">
+                    {{product.name}}
+                </div>
+                <div class="sub-tittle" [innerHTML]="product.short_description"></div>
             </div>
-            <div class="sub-tittle" [innerHTML]="product.short_description" ></div>
+            <div class="information">
+                <div class="price">
+                    <div class="regular-price" *ngIf="product.regular_price != product.price && product.regular_price">
+                        ${{product.regular_price}}
+                    </div>
+                    <div class="normal-price">
+                        ${{product.price}}
+                    </div>
+                </div>
+                <div class="quantity">
+                    <ion-item>
+                        <ion-button (click)="remove()" expand="block" fill="clear" shape="round">
+                            <ion-icon slot="icon-only" name="remove"></ion-icon>
+                        </ion-button>
+                        <ion-label>{{cantidad}}</ion-label>
+                        <ion-button (click)="add()" expand="block" fill="clear" shape="round">
+                            <ion-icon slot="icon-only" name="add"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                </div>
+            </div>
         </div>
-        <div class="information">
-            <div class="price">
-                <div class="regular-price" *ngIf="product.regular_price != product.price" >
-                    ${{product.regular_price}}
-                </div>
-                <div class="normal-price">
-                ${{product.price}}
+    </ion-card>
+    <ion-card *ngIf="product.name">
+        <div>
+            <div class="information">
+                <div class="quantity">
+                    <ion-item>
+                        <ion-label>Talla</ion-label>
+                        <ion-select [(ngModel)]="selected_value">
+                            <ion-select-option *ngFor="let value of values" value="{{value}}"
+                                [selected]="selected_value == value">{{value}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
                 </div>
             </div>
-            <div class="quantity">
-                <ion-item>
-                    <ion-label>Cantidad</ion-label>
-                    <ion-select [(ngModel)]="selected_value">
-                      <ion-select-option *ngFor="let value of values" value="{{value}}" [selected]="selected_value == value">{{value}}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </div>  
-        </div>     
-    </div>
+        </div>
     </ion-card>
 </ion-content>
 <ion-footer>

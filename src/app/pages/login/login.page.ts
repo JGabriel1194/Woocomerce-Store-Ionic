@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -6,6 +6,7 @@ import { AuthConstants } from 'src/app/config/auth-constants';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-login',
@@ -16,23 +17,23 @@ export class LoginPage implements OnInit {
 
   segment: String = 'start';
   user = {
-    username:'',
-    password:''
+    username: '',
+    password: ''
   }
   register = {
-    email:'',
-    first_name:'',
+    email: '',
+    first_name: '',
     last_name: '',
-    username:'',
-    password:'',
-    billing:{
-      first_name:'',
-      last_name:'',
-      email:''
+    username: '',
+    password: '',
+    billing: {
+      first_name: '',
+      last_name: '',
+      email: ''
     },
-    shipping:{
-      first_name:'',
-      last_name:'',
+    shipping: {
+      first_name: '',
+      last_name: '',
     }
   }
   constructor(
@@ -40,11 +41,12 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private fb: Facebook
   ) { }
 
   ngOnInit() {
-    
+
   }
 
   /**
@@ -92,64 +94,82 @@ export class LoginPage implements OnInit {
    * Funcion para cambiar de segmento
    * @param event - Recibe el evendo change
    */
-  segmentChanged( event){
+  segmentChanged(event) {
     this.segment = event.detail.value;
   }
 
   /**
    * Funcion para iniciar sesión
    */
-  loginCustomer(){
-    if(this.validateCustomer()){
+  loginCustomer() {
+    if (this.validateCustomer()) {
       this.loadingService.presentLoading('Iniciando')
       this.authService.login(this.user).subscribe(
-        (res: any)=>{
-          if(res){
+        (res: any) => {
+          if (res) {
             this.loadingService.dismissLoading();
-            if(res.statusCode == 200){
+            if (res.statusCode == 200) {
               console.log(res);
-              this.storageService.storageData(AuthConstants.AUTH,res.data);
-              
+              this.storageService.storageData(AuthConstants.AUTH, res.data);
+
               this.router.navigate(['/profile']);
-            }else{
+            } else {
               console.log(res);
-              this.alertService.presentAlert('Error',res.message);
+              this.alertService.presentAlert('Error', res.message);
             }
           }
         },
-        (err)=>{
+        (err) => {
           this.loadingService.dismissLoading();
-          this.alertService.presentAlert('Error',err.error.message);
+          this.alertService.presentAlert('Error', err.error.message);
         }
       )
-    }else{
-      this.alertService.presentAlert('Error','Ingresar usuario y contraseña')
+    } else {
+      this.alertService.presentAlert('Error', 'Ingresar usuario y contraseña')
     }
-    
+
   }
 
   /**
    * Función para registrar un nuevo cliente
    */
-  registerCustomer(){
-    if(this.validateRegister()){
+  registerCustomer() {
+    if (this.validateRegister()) {
       this.loadingService.presentLoading('Registrando')
       this.authService.register(this.register).subscribe(
-        (res: any)=>{
-          if(res){
+        (res: any) => {
+          if (res) {
             this.loadingService.dismissLoading();
             this.user.username = res.username;
             this.user.password = this.register.password;
             this.loginCustomer();
-          } 
+          }
         },
-        (err: any)=>{
+        (err: any) => {
           this.loadingService.dismissLoading();
-          this.alertService.presentAlert('Error',err.error.message);
+          this.alertService.presentAlert('Error', err.error.message);
         }
       )
-    }else{
-      this.alertService.presentAlert('Error','Datos incompletos');
+    } else {
+      this.alertService.presentAlert('Error', 'Datos incompletos');
     }
   }
+
+  onClickFacebook() {
+    this.user.username = 'shonmagandi@gmail.com';
+    this.user.password = 'Olgrc_2017';
+    this.loginCustomer();
+  }
+
+  getUserInfo(userId: string) {
+    this.fb.api(`me?fields=${userId}` + ['name', 'email', 'first_name', 'last_name', 'picture.type(large)'].join(), null)
+    .then(
+      (res: any) => {
+        if(res){
+          this.alertService.presentAlert('login',res);
+        }
+        console.log(res);
+      })
+    .catch(err => this.alertService.presentAlert('Error 2',err));
+    }
 }

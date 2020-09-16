@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPipe } from './pages/login.pipe';
-
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   declarations: [AppComponent, LoginPipe],
@@ -26,7 +26,8 @@ import { LoginPipe } from './pages/login.pipe';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Facebook
   ],
   bootstrap: [AppComponent]
 })
